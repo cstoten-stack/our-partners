@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Our Partners</title>
+</head>
+<body>
+<div style="max-width:1280px;margin:0 auto;padding:20px;font-family:Arial,sans-serif;color:#1f2937;">
+  <style>
+    .partners-intro-box {
+      background:#f8fafc;
+      border:1px solid #e5e7eb;
+      border-radius:16px;
+      padding:24px;
+      margin:24px 0 32px 0;
+    }
+    .partners-search {
+      width:100%;
+      padding:14px 16px;
+      font-size:16px;
+      border:1px solid #d1d5db;
+      border-radius:12px;
+      box-sizing:border-box;
+      margin:0 0 18px 0;
+    }
+    .partners-stats {
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin:0 0 28px 0;
+    }
+    .partners-stat {
+      background:#f8fafc;
+      border:1px solid #e5e7eb;
+      border-radius:999px;
+      padding:10px 14px;
+      font-size:14px;
+      line-height:1;
+    }
+    .partners-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:22px;
+    }
+    .partner-card {
+      background:#ffffff;
+      border:1px solid #e5e7eb;
+      border-radius:16px;
+      padding:22px;
+      box-shadow:0 4px 14px rgba(0,0,0,0.04);
+      display:flex;
+      flex-direction:column;
+      min-height:100%;
+    }
+    .partner-header {
+      display:flex;
+      gap:16px;
+      align-items:flex-start;
+      margin-bottom:16px;
+    }
+    .partner-logo-wrap {
+      width:72px;
+      height:72px;
+      background:#f8fafc;
+      border:1px solid #e5e7eb;
+      border-radius:14px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex:0 0 72px;
+      overflow:hidden;
+    }
+    .partner-logo-wrap img {
+      width:48px;
+      height:48px;
+      object-fit:contain;
+    }
+    .partner-logo-fallback {
+      width:100%;
+      height:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:24px;
+      font-weight:700;
+      color:#032E61;
+    }
+    .partner-name {
+      font-size:22px;
+      line-height:1.2;
+      margin:0 0 10px 0;
+      color:#032E61;
+    }
+    .partner-tags {
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+    .partner-tag {
+      display:inline-block;
+      border-radius:999px;
+      padding:7px 12px;
+      font-size:13px;
+      font-weight:700;
+      line-height:1;
+    }
+    .tag-fia-gold {
+      background:#D4AF37;
+      color:#032E61;
+    }
+    .tag-fia {
+      background:#032E61;
+      color:#ffffff;
+    }
+    .tag-ean {
+      background:#73B629;
+      color:#ffffff;
+    }
+    .partner-meta {
+      margin:0 0 10px 0;
+      font-size:15px;
+      line-height:1.6;
+    }
+    .partner-meta strong {
+      color:#111827;
+    }
+    .partner-button-row {
+      margin-top:auto;
+      padding-top:14px;
+    }
+    .partner-button {
+      display:inline-block;
+      background:#73B629;
+      color:#ffffff;
+      text-decoration:none;
+      padding:12px 18px;
+      border-radius:10px;
+      font-size:15px;
+      font-weight:700;
+    }
+    .partner-no-url {
+      display:inline-block;
+      background:#f3f4f6;
+      color:#6b7280;
+      padding:12px 18px;
+      border-radius:10px;
+      font-size:15px;
+      font-weight:700;
+    }
+    .partner-url {
+      margin:10px 0 0 0;
+      font-size:13px;
+      color:#6b7280;
+      word-break:break-word;
+    }
+    .partners-empty {
+      display:none;
+      margin-top:20px;
+      padding:18px;
+      background:#fff7ed;
+      border:1px solid #fed7aa;
+      border-radius:12px;
+      color:#9a3412;
+    }
+  </style>
+
+  <h1 style="font-size:42px;line-height:1.1;color:#032E61;margin:0 0 16px 0;">Our Partners</h1>
+
+  <p style="font-size:18px;line-height:1.7;margin:0 0 14px 0;">This page is a working partner directory for David Doyle, combining FIA and Ethical Agent Network members in one place so the team can quickly search by agency name, postcode area, or network.</p>
+
+  <div class="partners-intro-box">
+    <h2 style="margin:0 0 12px 0;color:#032E61;font-size:28px;">Find the right referral partner quickly</h2>
+    <p style="margin:0;font-size:17px;line-height:1.7;">Search by partner name, postcode, website, or tag. Try terms like HP1, EAN, FIA Gold, W5, SG8, or Harrogate.</p>
+  </div>
+
+  <input id="partnerSearch" class="partners-search" type="text" placeholder="Search by partner name, postcode, website, or network" onkeyup="renderPartners()">
+
+  <div class="partners-stats">
+    <span class="partners-stat">Total partners: 89</span>
+    <span class="partners-stat">FIA Gold: 42</span>
+    <span class="partners-stat">FIA: 11</span>
+    <span class="partners-stat">EAN Member: 41</span>
+    <span class="partners-stat">Dual network: 5</span>
+  </div>
+
+  <div id="partnersGrid" class="partners-grid"></div>
+  <div id="partnersEmpty" class="partners-empty">No partners matched that search.</div>
+</div>
+
+<script>
+  const partnersData = [{"agency":"Accord Homes","lead":"Amanda Carr","areas":"RM1 RM2 RM3 RM5 RM14","website":"accordhomes.co.uk","url":"https://accordhomes.co.uk","tags":["EAN Member"],"search":"accord homes amanda carr rm1 rm2 rm3 rm5 rm14 ean member accordhomes.co.uk","initials":"AH"},{"agency":"Alexander May","lead":"Rob Mamuda","areas":"BS41, BS8","website":"alexandermay.co.uk","url":"https://alexandermay.co.uk","tags":["FIA Gold"],"search":"alexander may rob mamuda bs41, bs8 fia gold alexandermay.co.uk","initials":"AM"},{"agency":"Alex Harvey Estate Agents","lead":"Alex Harvey","areas":"RH12, RH13, RH14","website":"alexharveyestateagents.co.uk","url":"https://alexharveyestateagents.co.uk","tags":["FIA Gold"],"search":"alex harvey estate agents alex harvey rh12, rh13, rh14 fia gold alexharveyestateagents.co.uk","initials":"AH"},{"agency":"Andrew Pearce","lead":"Joe Prosser","areas":"HA5","website":"andrew-pearce.co.uk","url":"https://andrew-pearce.co.uk","tags":["FIA Gold"],"search":"andrew pearce joe prosser ha5 fia gold andrew-pearce.co.uk","initials":"AP"},{"agency":"Andrews Residential","lead":"Conor Andrews","areas":"UB8 UB9 UB10","website":"andrewsresidential.co.uk","url":"https://andrewsresidential.co.uk","tags":["EAN Member"],"search":"andrews residential conor andrews ub8 ub9 ub10 ean member andrewsresidential.co.uk","initials":"AR"},{"agency":"Arc Homes","lead":"Dean Baylis","areas":"M46, WN2","website":"arc-homes.net","url":"https://arc-homes.net","tags":["FIA Gold"],"search":"arc homes dean baylis m46, wn2 fia gold arc-homes.net","initials":"AH"},{"agency":"Ariston","lead":"Antony Karageorghis","areas":"N19, N4","website":"aristonproperty.co.uk","url":"https://aristonproperty.co.uk","tags":["FIA Gold"],"search":"ariston antony karageorghis n19, n4 fia gold aristonproperty.co.uk","initials":"AR"},{"agency":"Beercocks Limited","lead":"Steve Beercock","areas":"HU codes","website":"beercocks.com","url":"https://beercocks.com","tags":["EAN Member"],"search":"beercocks limited steve beercock hu codes ean member beercocks.com","initials":"BL"},{"agency":"Bowden Bradley","lead":"Joe Bradley","areas":"IG6, IG7, IG8","website":"bowdenbradley.co.uk","url":"https://bowdenbradley.co.uk","tags":["FIA Gold"],"search":"bowden bradley joe bradley ig6, ig7, ig8 fia gold bowdenbradley.co.uk","initials":"BB"},{"agency":"BrightWater Properties","lead":"Darren Loose","areas":"BH24, BH31, SP6, BH23 & BH6","website":"brightwaterproperties.co.uk","url":"https://brightwaterproperties.co.uk","tags":["EAN Member"],"search":"brightwater properties darren loose bh24, bh31, sp6, bh23 & bh6 ean member brightwaterproperties.co.uk","initials":"BP"},{"agency":"Buckley Wand","lead":"Martyn Wand","areas":"NG31, NG32, NG33","website":"buckleywand.co.uk","url":"https://buckleywand.co.uk","tags":["FIA"],"search":"buckley wand martyn wand ng31, ng32, ng33 fia buckleywand.co.uk","initials":"BW"},{"agency":"Carter Oliver Property Experts Ltd","lead":"Carolyn Murphy","areas":"CV23, LE17, LE9","website":"carteroliver.co.uk","url":"https://carteroliver.co.uk","tags":["FIA Gold"],"search":"carter oliver property experts ltd carolyn murphy cv23, le17, le9 fia gold carteroliver.co.uk","initials":"CO"},{"agency":"Carver Group","lead":"James Carver","areas":"DL1, DL2, DL3, DL4, DL5, DL6, DL7, DL8, DL9, DL10, DL11, DL12, DL13, DL14","website":"carvergroup.co.uk","url":"https://carvergroup.co.uk","tags":["EAN Member"],"search":"carver group james carver dl1, dl2, dl3, dl4, dl5, dl6, dl7, dl8, dl9, dl10, dl11, dl12, dl13, dl14 ean member carvergroup.co.uk","initials":"CG"},{"agency":"Castle Homes","lead":"Craig Walsh","areas":"DL1, DL2, DL3","website":"castlehomesproperty.co.uk","url":"https://castlehomesproperty.co.uk","tags":["FIA"],"search":"castle homes craig walsh dl1, dl2, dl3 fia castlehomesproperty.co.uk","initials":"CH"},{"agency":"Chandlers Independent Estate Agents","lead":"David Murray","areas":"SG1, SG2, SG3","website":"chandlers-estates.co.uk","url":"https://chandlers-estates.co.uk","tags":["FIA"],"search":"chandlers independent estate agents david murray sg1, sg2, sg3 fia chandlers-estates.co.uk","initials":"CI"},{"agency":"Charles David Casson","lead":"Matt Baldock","areas":"CM1, CM2","website":"charlesdavidcasson.co.uk","url":"https://charlesdavidcasson.co.uk","tags":["FIA Gold"],"search":"charles david casson matt baldock cm1, cm2 fia gold charlesdavidcasson.co.uk","initials":"CD"},{"agency":"Chartwell Noble","lead":"Ross D'Aniello","areas":"WR1, WR2, WR3","website":"chartwellnoble.co.uk","url":"https://chartwellnoble.co.uk","tags":["FIA Gold"],"search":"chartwell noble ross d'aniello wr1, wr2, wr3 fia gold chartwellnoble.co.uk","initials":"CN"},{"agency":"Chosen Estate Agents Ltd","lead":"Erica Edwards","areas":"GL3","website":"chosenestateagents.co.uk","url":"https://chosenestateagents.co.uk","tags":["FIA"],"search":"chosen estate agents ltd erica edwards gl3 fia chosenestateagents.co.uk","initials":"CE"},{"agency":"Churcher Estates","lead":"James Churcher","areas":"L39, L40, PR8","website":"churcherestates.co.uk","url":"https://churcherestates.co.uk","tags":["FIA Gold"],"search":"churcher estates james churcher l39, l40, pr8 fia gold churcherestates.co.uk","initials":"CE"},{"agency":"Coco Property Group Limited","lead":"Ian Munro-Price","areas":"DT3, DT4, DT5","website":"cocoproperty.co.uk","url":"https://cocoproperty.co.uk","tags":["FIA Gold"],"search":"coco property group limited ian munro-price dt3, dt4, dt5 fia gold cocoproperty.co.uk","initials":"CP"},{"agency":"Courtyard Properties","lead":"David Gibbons","areas":"WA1 WA2 WA3","website":"courtyardhomes.co.uk","url":"https://courtyardhomes.co.uk","tags":["EAN Member"],"search":"courtyard properties david gibbons wa1 wa2 wa3 ean member courtyardhomes.co.uk","initials":"CP"},{"agency":"Crane & Co","lead":"Mike Crane","areas":"BN27, BN24, BN26","website":"craneandco.co.uk","url":"https://craneandco.co.uk","tags":["EAN Member"],"search":"crane & co mike crane bn27, bn24, bn26 ean member craneandco.co.uk","initials":"CC"},{"agency":"CWB Property","lead":"Warren Bowman","areas":"ME6, ME2, ME19, ME20, ME18","website":"cwbproperty.co.uk","url":"https://cwbproperty.co.uk","tags":["EAN Member"],"search":"cwb property warren bowman me6, me2, me19, me20, me18 ean member cwbproperty.co.uk","initials":"CP"},{"agency":"David Doyle","lead":"Charles Stoten","areas":"HP1, HP2, HP3","website":"daviddoyle.co.uk","url":"https://daviddoyle.co.uk","tags":["FIA Gold","EAN Member"],"search":"david doyle charles stoten hp1, hp2, hp3 fia gold ean member daviddoyle.co.uk","initials":"DD"},{"agency":"David James","lead":"David Tickner","areas":"BR1, BR2","website":"djames.co.uk","url":"https://djames.co.uk","tags":["FIA Gold"],"search":"david james david tickner br1, br2 fia gold djames.co.uk","initials":"DJ"},{"agency":"David J Robinson","lead":"David Robinson","areas":"EX22, PL14, PL15","website":"djrestateagents.co.uk","url":"https://djrestateagents.co.uk","tags":["FIA"],"search":"david j robinson david robinson ex22, pl14, pl15 fia djrestateagents.co.uk","initials":"DJ"},{"agency":"Deakin-White","lead":"Ed Restall-Harrison","areas":"AL1, AL10, HP22","website":"dwrealestate.co.uk","url":"https://dwrealestate.co.uk","tags":["FIA Gold"],"search":"deakin-white ed restall-harrison al1, al10, hp22 fia gold dwrealestate.co.uk","initials":"DW"},{"agency":"Edward Chase","lead":"Sukhbir Basra","areas":"IG3","website":"edwardchase.co.uk","url":"https://edwardchase.co.uk","tags":["FIA Gold"],"search":"edward chase sukhbir basra ig3 fia gold edwardchase.co.uk","initials":"EC"},{"agency":"Eldridge Estates","lead":"Razaul Hoque","areas":"SE18, SE28","website":"eldridgeestates.co.uk","url":"https://eldridgeestates.co.uk","tags":["FIA Gold"],"search":"eldridge estates razaul hoque se18, se28 fia gold eldridgeestates.co.uk","initials":"EE"},{"agency":"Elements Property & Co","lead":"George Papa","areas":"E5 E8 N16","website":"elementproperties.co.uk","url":"https://elementproperties.co.uk","tags":["EAN Member"],"search":"elements property & co george papa e5 e8 n16 ean member elementproperties.co.uk","initials":"EP"},{"agency":"Ensum Brown","lead":"Neil Wise","areas":"SG8","website":"ensumbrown.com","url":"https://ensumbrown.com","tags":["FIA Gold","EAN Member"],"search":"ensum brown neil wise sg8 fia gold ean member ensumbrown.com","initials":"EB"},{"agency":"George Edwards","lead":"Paul Halliday","areas":"DE11, DE12, SA61","website":"georgeedwards.com","url":"https://georgeedwards.com","tags":["FIA Gold"],"search":"george edwards paul halliday de11, de12, sa61 fia gold georgeedwards.com","initials":"GE"},{"agency":"Go Haven","lead":"Nasim Patel","areas":"HD1, HD2, HD3, HD4, HD5, HD6, HD7, HD8, HD9 - Lettings Membership","website":"gohaven.com","url":"https://gohaven.com","tags":["EAN Member"],"search":"go haven nasim patel hd1, hd2, hd3, hd4, hd5, hd6, hd7, hd8, hd9 - lettings membership ean member gohaven.com","initials":"GH"},{"agency":"Grey & Co","lead":"Abigail Grey","areas":"HA9, HA0, NW10, NW9, UB6, HA3.","website":"greyandco.co.uk","url":"https://greyandco.co.uk","tags":["EAN Member"],"search":"grey & co abigail grey ha9, ha0, nw10, nw9, ub6, ha3. ean member greyandco.co.uk","initials":"GC"},{"agency":"Greykey Estates","lead":"Hamid-ur Chowdhury","areas":"BD1, BD23","website":"greykeyestates.co.uk","url":"https://greykeyestates.co.uk","tags":["FIA"],"search":"greykey estates hamid-ur chowdhury bd1, bd23 fia greykeyestates.co.uk","initials":"GE"},{"agency":"Harding Green","lead":"Nick Carter","areas":"W8","website":"hardinggreen.com","url":"https://hardinggreen.com","tags":["FIA Gold"],"search":"harding green nick carter w8 fia gold hardinggreen.com","initials":"HG"},{"agency":"Harrisons Homes","lead":"Chris Ellis","areas":"ME10, ME13, ME9","website":"harrisonshomes.co.uk","url":"https://harrisonshomes.co.uk","tags":["FIA Gold"],"search":"harrisons homes chris ellis me10, me13, me9 fia gold harrisonshomes.co.uk","initials":"HH"},{"agency":"Henshaw Homes","lead":"Rachel Henshaw","areas":"CV31, CV32, CV34","website":"henshaw.homes","url":"https://henshaw.homes","tags":["FIA Gold"],"search":"henshaw homes rachel henshaw cv31, cv32, cv34 fia gold henshaw.homes","initials":"HH"},{"agency":"Hewitt Adams","lead":"Ben Adams","areas":"CH60, CH61","website":"hewittadams.co.uk","url":"https://hewittadams.co.uk","tags":["FIA Gold"],"search":"hewitt adams ben adams ch60, ch61 fia gold hewittadams.co.uk","initials":"HA"},{"agency":"Heywoods 1881","lead":"Alistair Trippett","areas":"ST5","website":"heywoodsproperty.co.uk","url":"https://heywoodsproperty.co.uk","tags":["FIA Gold"],"search":"heywoods 1881 alistair trippett st5 fia gold heywoodsproperty.co.uk","initials":"H1"},{"agency":"Homesmart Estates","lead":"Helen Pass","areas":"WA4 WA6 WA7 WA8 CH2","website":"homesmartestates.com","url":"https://homesmartestates.com","tags":["EAN Member"],"search":"homesmart estates helen pass wa4 wa6 wa7 wa8 ch2 ean member homesmartestates.com","initials":"HE"},{"agency":"Howgates","lead":"Gavin Wilkins","areas":"RM16 SS17","website":"howgates.com","url":"https://howgates.com","tags":["EAN Member"],"search":"howgates gavin wilkins rm16 ss17 ean member howgates.com","initials":"HO"},{"agency":"In House Sales & Lettings","lead":"Steve Puddifoot","areas":"OX10, OX11, OX44","website":"inhouseestateagents.co.uk","url":"https://inhouseestateagents.co.uk","tags":["FIA"],"search":"in house sales & lettings steve puddifoot ox10, ox11, ox44 fia inhouseestateagents.co.uk","initials":"IH"},{"agency":"Inspire Estate Agents","lead":"Matthew Cousins","areas":"RH10, RH11","website":"inspireestates.co.uk","url":"https://inspireestates.co.uk","tags":["FIA Gold"],"search":"inspire estate agents matthew cousins rh10, rh11 fia gold inspireestates.co.uk","initials":"IE"},{"agency":"Irlam Estates Ltd","lead":"Andrew Jones","areas":"M44","website":"irlamestates.co.uk","url":"https://irlamestates.co.uk","tags":["FIA"],"search":"irlam estates ltd andrew jones m44 fia irlamestates.co.uk","initials":"IE"},{"agency":"Jag Thind Property Consultants","lead":"Jagdeep Thind","areas":"DA10, DA11, DA12","website":"jtpropertyconsultants.co.uk","url":"https://jtpropertyconsultants.co.uk","tags":["FIA Gold"],"search":"jag thind property consultants jagdeep thind da10, da11, da12 fia gold jtpropertyconsultants.co.uk","initials":"JT"},{"agency":"JDG Estate Agents","lead":"Michelle Gallagher","areas":"LA1 LA2 LA3 LA4 LA5 LA6, LA9","website":"jdg.co.uk","url":"https://jdg.co.uk","tags":["EAN Member"],"search":"jdg estate agents michelle gallagher la1 la2 la3 la4 la5 la6, la9 ean member jdg.co.uk","initials":"JE"},{"agency":"Johnsons Property Consultancy","lead":"Tom Tarver","areas":"WR7, WR8, WR10, WR11, WR12","website":"johnsons-property.com","url":"https://johnsons-property.com","tags":["EAN Member"],"search":"johnsons property consultancy tom tarver wr7, wr8, wr10, wr11, wr12 ean member johnsons-property.com","initials":"JP"},{"agency":"KMJ Property","lead":"David Johnson","areas":"RH18, TN1, TN10","website":"kmjproperty.co.uk","url":"https://kmjproperty.co.uk","tags":["FIA Gold"],"search":"kmj property david johnson rh18, tn1, tn10 fia gold kmjproperty.co.uk","initials":"KP"},{"agency":"Knightsbridge Investments","lead":"Luke St Clair","areas":"LE2, LE18, LE5, LE8, LE1","website":"knightsbridge-estates.co.uk","url":"https://knightsbridge-estates.co.uk","tags":["EAN Member"],"search":"knightsbridge investments luke st clair le2, le18, le5, le8, le1 ean member knightsbridge-estates.co.uk","initials":"KI"},{"agency":"Leightons Estate Agency Limited","lead":"Michael Leighton","areas":"BD20, BD21, BD22, BD23","website":"leightonsestateagency.co.uk","url":"https://leightonsestateagency.co.uk","tags":["EAN Member"],"search":"leightons estate agency limited michael leighton bd20, bd21, bd22, bd23 ean member leightonsestateagency.co.uk","initials":"LE"},{"agency":"Lennon James","lead":"Jon Brierley","areas":"PE26, PE27, PE28","website":"lennonjamesproperty.co.uk","url":"https://lennonjamesproperty.co.uk","tags":["FIA Gold"],"search":"lennon james jon brierley pe26, pe27, pe28 fia gold lennonjamesproperty.co.uk","initials":"LJ"},{"agency":"Leslie & Co","lead":"Paul Leslie","areas":"W13, W5","website":"leslieandcompanyuk.com","url":"https://leslieandcompanyuk.com","tags":["FIA Gold","EAN Member"],"search":"leslie & co paul leslie w13, w5 fia gold ean member leslieandcompanyuk.com","initials":"LC"},{"agency":"Lime Property","lead":"Sam Humphreys","areas":"HU1","website":"lime-property.co.uk","url":"https://lime-property.co.uk","tags":["FIA Gold"],"search":"lime property sam humphreys hu1 fia gold lime-property.co.uk","initials":"LP"},{"agency":"LL Estates","lead":"Louise Young","areas":"LL18, LL19, LL22","website":"llestates.co.uk","url":"https://llestates.co.uk","tags":["FIA Gold","EAN Member"],"search":"ll estates louise young ll18, ll19, ll22 fia gold ean member llestates.co.uk","initials":"LE"},{"agency":"Location Location London","lead":"Asad Riaz","areas":"E5 E8 N16","website":"locationlocation.com","url":"https://locationlocation.com","tags":["EAN Member"],"search":"location location london asad riaz e5 e8 n16 ean member locationlocation.com","initials":"LL"},{"agency":"Location Location Thetford","lead":"Andy Overman","areas":"IP23, IP24, IP25, IP26, IP27, IP28, IP29, IP30, IP31","website":"locationlocation.com","url":"https://locationlocation.com","tags":["EAN Member"],"search":"location location thetford andy overman ip23, ip24, ip25, ip26, ip27, ip28, ip29, ip30, ip31 ean member locationlocation.com","initials":"LL"},{"agency":"Maurice Kilbride","lead":"Maurice Kilbride","areas":"SK3, SK8","website":"mkiea.co.uk","url":"https://mkiea.co.uk","tags":["FIA Gold"],"search":"maurice kilbride maurice kilbride sk3, sk8 fia gold mkiea.co.uk","initials":"MK"},{"agency":"Max 25 Limited","lead":"Claire Meyer","areas":"DT1, DT2","website":"max25.co.uk","url":"https://max25.co.uk","tags":["FIA Gold"],"search":"max 25 limited claire meyer dt1, dt2 fia gold max25.co.uk","initials":"M2"},{"agency":"My London Home","lead":"Steven Herd","areas":"SE1, SW8 and SW11","website":"mylondonhome.com","url":"https://mylondonhome.com","tags":["EAN Member"],"search":"my london home steven herd se1, sw8 and sw11 ean member mylondonhome.com","initials":"ML"},{"agency":"Myrings","lead":"Gemma Myring","areas":"HG1, HG2, HG3","website":"myringsestateagents.com","url":"https://myringsestateagents.com","tags":["FIA Gold","EAN Member"],"search":"myrings gemma myring hg1, hg2, hg3 fia gold ean member myringsestateagents.com","initials":"MY"},{"agency":"Neil Robinson Estate Agents","lead":"Neil Robinson","areas":"WN4, WN5, WN8","website":"neilrobinson.co.uk","url":"https://neilrobinson.co.uk","tags":["FIA Gold"],"search":"neil robinson estate agents neil robinson wn4, wn5, wn8 fia gold neilrobinson.co.uk","initials":"NR"},{"agency":"Nest in Essex","lead":"Nichols Cheshire","areas":"Ss6 Ss5 Ss9 Ss11 Ss7","website":"nestinessex.co.uk","url":"https://nestinessex.co.uk","tags":["EAN Member"],"search":"nest in essex nichols cheshire ss6 ss5 ss9 ss11 ss7 ean member nestinessex.co.uk","initials":"NI"},{"agency":"North Wall Property","lead":"Craig Thompson","areas":"L9, L10, L23, L25, L31, L32, L33, L37","website":"northwallproperty.com","url":"https://northwallproperty.com","tags":["EAN Member"],"search":"north wall property craig thompson l9, l10, l23, l25, l31, l32, l33, l37 ean member northwallproperty.com","initials":"NW"},{"agency":"Page & Co","lead":"Holly Page","areas":"CT1, CT2, CT3","website":"pageandco.co.uk","url":"https://pageandco.co.uk","tags":["FIA Gold"],"search":"page & co holly page ct1, ct2, ct3 fia gold pageandco.co.uk","initials":"PC"},{"agency":"Paramount Properties","lead":"Spencer Lawrence","areas":"NW6 - Roaming to a degree","website":"paramountproperties.co.uk","url":"https://paramountproperties.co.uk","tags":["EAN Member"],"search":"paramount properties spencer lawrence nw6 - roaming to a degree ean member paramountproperties.co.uk","initials":"PP"},{"agency":"Park Row","lead":"Emma Makin","areas":"LS25","website":"parkrow.co.uk","url":"https://parkrow.co.uk","tags":["FIA Gold"],"search":"park row emma makin ls25 fia gold parkrow.co.uk","initials":"PR"},{"agency":"Parkview Property","lead":"Janice Molloy","areas":"","website":"parkview-property.co.uk","url":"https://parkview-property.co.uk","tags":["EAN Member"],"search":"parkview property janice molloy ean member parkview-property.co.uk","initials":"PP"},{"agency":"Peter Cuffaro Estate Agents","lead":"Peter Cuffaro","areas":"EN11, SG12","website":"petercuffaro.co.uk","url":"https://petercuffaro.co.uk","tags":["FIA Gold"],"search":"peter cuffaro estate agents peter cuffaro en11, sg12 fia gold petercuffaro.co.uk","initials":"PC"},{"agency":"Phillips George","lead":"Clare Phillips","areas":"LE18, LE3","website":"phillipsgeorge.co.uk","url":"https://phillipsgeorge.co.uk","tags":["FIA"],"search":"phillips george clare phillips le18, le3 fia phillipsgeorge.co.uk","initials":"PG"},{"agency":"Pinewood","lead":"Stacey Davies-Bowler","areas":"S40, S41, S42","website":"pinewoodproperties.co.uk","url":"https://pinewoodproperties.co.uk","tags":["FIA Gold"],"search":"pinewood stacey davies-bowler s40, s41, s42 fia gold pinewoodproperties.co.uk","initials":"PI"},{"agency":"Quarters Residential","lead":"Nick Harris","areas":"RG40, RG41","website":"quartersresidential.co.uk","url":"https://quartersresidential.co.uk","tags":["FIA Gold"],"search":"quarters residential nick harris rg40, rg41 fia gold quartersresidential.co.uk","initials":"QR"},{"agency":"Ron Gibson Personal Agent","lead":"Ron Gibson","areas":"BN8 TN22 TN6","website":"","url":"","tags":["EAN Member"],"search":"ron gibson personal agent ron gibson bn8 tn22 tn6 ean member","initials":"RG"},{"agency":"Sacha Scott","lead":"Sacha Martin","areas":"SM7 KT17 KT18 KT19 KT20","website":"sachascott.com","url":"https://sachascott.com","tags":["EAN Member"],"search":"sacha scott sacha martin sm7 kt17 kt18 kt19 kt20 ean member sachascott.com","initials":"SS"},{"agency":"Sarah Clark Properties","lead":"Sarah Clark","areas":"BS1 BS6, BS7, BS8, BS9","website":"sarahclarkproperties.co.uk","url":"https://sarahclarkproperties.co.uk","tags":["EAN Member"],"search":"sarah clark properties sarah clark bs1 bs6, bs7, bs8, bs9 ean member sarahclarkproperties.co.uk","initials":"SC"},{"agency":"Sarah Mains Residential Limited","lead":"Sarah Mains","areas":"See note","website":"sarahmains.com","url":"https://sarahmains.com","tags":["EAN Member"],"search":"sarah mains residential limited sarah mains see note ean member sarahmains.com","initials":"SM"},{"agency":"Scottish Property Centre","lead":"Craig Smith","areas":"All G codes - PA23 PA1","website":"scottishpropertycentre.net","url":"https://scottishpropertycentre.net","tags":["EAN Member"],"search":"scottish property centre craig smith all g codes - pa23 pa1 ean member scottishpropertycentre.net","initials":"SP"},{"agency":"Sewell & Gardner","lead":"Alex Sewell","areas":"WD3","website":"sewellgardner.com","url":"https://sewellgardner.com","tags":["FIA"],"search":"sewell & gardner alex sewell wd3 fia sewellgardner.com","initials":"SG"},{"agency":"Spencer Harvey","lead":"Richard Harvey","areas":"SK1, SK2, SK3, SK4, SK5, SK6, SK7, SK8","website":"spencerharvey.co.uk","url":"https://spencerharvey.co.uk","tags":["EAN Member"],"search":"spencer harvey richard harvey sk1, sk2, sk3, sk4, sk5, sk6, sk7, sk8 ean member spencerharvey.co.uk","initials":"SH"},{"agency":"Stephen Tew Estate Agents","lead":"Stephen Tew","areas":"FY4, FY6","website":"stephentew.co.uk","url":"https://stephentew.co.uk","tags":["FIA"],"search":"stephen tew estate agents stephen tew fy4, fy6 fia stephentew.co.uk","initials":"ST"},{"agency":"Sure Sales and Lettings LTD","lead":"Andrew Sharpe","areas":"DE13 DE14 DE15 DE65 DE23","website":"surepropertygroup.com","url":"https://surepropertygroup.com","tags":["EAN Member"],"search":"sure sales and lettings ltd andrew sharpe de13 de14 de15 de65 de23 ean member surepropertygroup.com","initials":"SS"},{"agency":"Swindon Homefinders","lead":"Sue Gidney","areas":"SN1, SN2, SN3, SN4, SN5 & SN25","website":"swindonhomefinders.com","url":"https://swindonhomefinders.com","tags":["EAN Member"],"search":"swindon homefinders sue gidney sn1, sn2, sn3, sn4, sn5 & sn25 ean member swindonhomefinders.com","initials":"SH"},{"agency":"The Property Cloud","lead":"Aaron Kirk","areas":"DA7, DA16, DA17, DA8, DA1","website":"thepropertycloud.uk","url":"https://thepropertycloud.uk","tags":["EAN Member"],"search":"the property cloud aaron kirk da7, da16, da17, da8, da1 ean member thepropertycloud.uk","initials":"TP"},{"agency":"Tom Ashwood Real Estate","lead":"Tom Ashwood","areas":"IG11","website":"tomashwood.co.uk","url":"https://tomashwood.co.uk","tags":["FIA Gold"],"search":"tom ashwood real estate tom ashwood ig11 fia gold tomashwood.co.uk","initials":"TA"},{"agency":"Turner Dooley Property Professionals","lead":"Jake Dooley","areas":"CH62, CH63, CH65","website":"turnerdooley.co.uk","url":"https://turnerdooley.co.uk","tags":["FIA Gold"],"search":"turner dooley property professionals jake dooley ch62, ch63, ch65 fia gold turnerdooley.co.uk","initials":"TD"},{"agency":"Village Properties","lead":"Samantha Collocott","areas":"SW14, SW13, SW14, TW9, TW10","website":"village-properties.co.uk","url":"https://village-properties.co.uk","tags":["EAN Member"],"search":"village properties samantha collocott sw14, sw13, sw14, tw9, tw10 ean member village-properties.co.uk","initials":"VP"},{"agency":"Walter & Mair","lead":"Carol Bassett","areas":"CR3 CR5 CR8","website":"walterandmair.co.uk","url":"https://walterandmair.co.uk","tags":["EAN Member"],"search":"walter & mair carol bassett cr3 cr5 cr8 ean member walterandmair.co.uk","initials":"WM"},{"agency":"We Let Properties","lead":"Emma Enderwitz","areas":"M1, M15, M2","website":"weletproperties.co.uk","url":"https://weletproperties.co.uk","tags":["FIA Gold"],"search":"we let properties emma enderwitz m1, m15, m2 fia gold weletproperties.co.uk","initials":"WL"},{"agency":"Wright Residential Ltd","lead":"Paul Buamah","areas":"NE6, NE3, NE5, NE8 and SR2","website":"wrightresidential.co.uk","url":"https://wrightresidential.co.uk","tags":["EAN Member"],"search":"wright residential ltd paul buamah ne6, ne3, ne5, ne8 and sr2 ean member wrightresidential.co.uk","initials":"WR"}];
+
+  function tagClass(tag) {
+    if (tag === 'FIA Gold') return 'tag-fia-gold';
+    if (tag === 'FIA') return 'tag-fia';
+    return 'tag-ean';
+  }
+
+  function escapeHtml(value) {
+    return String(value || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function renderPartners() {
+    const filter = document.getElementById('partnerSearch').value.toLowerCase().trim();
+    const grid = document.getElementById('partnersGrid');
+    const empty = document.getElementById('partnersEmpty');
+
+    const filtered = partnersData.filter(partner => partner.search.indexOf(filter) > -1);
+
+    grid.innerHTML = filtered.map(partner => {
+      const favicon = partner.website
+        ? `<img src="https://www.google.com/s2/favicons?sz=128&domain_url=https://${partner.website}" alt="${escapeHtml(partner.agency)} logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">`
+        : '';
+
+      const fallbackDisplay = partner.website ? 'display:none;' : 'display:flex;';
+      const tags = partner.tags.map(tag => `<span class="partner-tag ${tagClass(tag)}">${escapeHtml(tag)}</span>`).join('');
+      const button = partner.url
+        ? `<a class="partner-button" href="${escapeHtml(partner.url)}" target="_blank" rel="noopener nofollow">Visit website</a>`
+        : `<span class="partner-no-url">Website not supplied</span>`;
+      const urlLine = partner.website ? `<p class="partner-url">${escapeHtml(partner.website)}</p>` : '';
+
+      return `
+        <div class="partner-card" data-search="${escapeHtml(partner.search)}">
+          <div class="partner-header">
+            <div class="partner-logo-wrap">
+              ${favicon}
+              <span class="partner-logo-fallback" style="${fallbackDisplay}">${escapeHtml(partner.initials)}</span>
+            </div>
+            <div>
+              <h3 class="partner-name">${escapeHtml(partner.agency)}</h3>
+              <div class="partner-tags">${tags}</div>
+            </div>
+          </div>
+          <p class="partner-meta"><strong>Lead:</strong> ${escapeHtml(partner.lead || 'Not supplied')}</p>
+          <p class="partner-meta"><strong>Areas covered:</strong> ${escapeHtml(partner.areas || 'Not supplied')}</p>
+          <div class="partner-button-row">
+            ${button}
+            ${urlLine}
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    empty.style.display = filtered.length ? 'none' : 'block';
+  }
+
+  renderPartners();
+</script>
+</body>
+</html>
